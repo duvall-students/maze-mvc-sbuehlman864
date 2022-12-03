@@ -24,23 +24,25 @@ public class SearchAlgorithm {
 	}
 	public boolean step(){
 		// Don't keep computing after goal is reached or determined impossible.
-		whenSearchIsOver();
-		// Find possible next steps
-		Collection<Point> neighbors = getNeighbors();
-		// Choose one to be a part of the path
-		Point next = chooseNeighbor(neighbors);
-		// mark the next step
-		if(next!=null){
-			maze.markPath(next);
-			recordLink(next);
+		if(!whenSearchIsOver()) {
+			// Find possible next steps
+			Collection<Point> neighbors = getNeighbors();
+			// Choose one to be a part of the path
+			Point next = chooseNeighbor(neighbors);
+			// mark the next step
+			if(next!=null){
+				maze.markPath(next);
+				recordLink(next);
+			}
+			else{	
+				ifNextStateNull();
+			}
+			// if no next step is found, mark current 
+			// state "visited" and take off queue.
+			resetCurrent();
+			checkSearchOver();
+			return searchResult;	
 		}
-		else{	
-			ifNextStateNull();
-		}
-		// if no next step is found, mark current 
-		// state "visited" and take off queue.
-		resetCurrent();
-		checkSearchOver();
 		return searchResult;	
 	}
 	

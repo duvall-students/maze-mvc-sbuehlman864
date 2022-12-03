@@ -111,10 +111,11 @@ public class DFS extends SearchAlgorithm{
 	 * This implementation resets the "current" instance variable 
 	 * to be the next one on the fringe data structure.
 	 */
-//	protected void resetCurrent(){
-//		Stack<Point> stack = (Stack<Point>)data;
-//		current = stack.peek();
-//	}
+	@Override
+	protected void resetCurrent(){
+		Stack<Point> stack = (Stack<Point>)data;
+		current = stack.peek();
+	}
 	
 	/*
 	 * Search is over and unsuccessful if there are no more fringe points to consider.
